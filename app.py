@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 
 
 class Form(db.Model):
-    id = db.Column(db.integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
     email = db.Column(db.String(80))
@@ -26,11 +26,11 @@ def index():
         last_name = request.form["last_name"]
         email = request.form["email"]
         date = request.form["date"]
-        date_obj = datetime.strptime(date, "%y-%m-%d")
+        date_obj = datetime.strptime(date, "%Y-%m-%d")
         occupation = request.form["occupation"]
 
         form = Form(first_name=first_name, last_name=last_name, email=email, date=date_obj, occupation=occupation)
-        db.session(form)
+        db.session.add(form)
         db.session.commit()
 
 
